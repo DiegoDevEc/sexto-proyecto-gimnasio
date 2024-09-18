@@ -1,0 +1,79 @@
+<div class="row">
+    <div class="d-flex justify-content-end"> 
+
+        <div class="col-3 py-1">
+            <button type="button" class="btn btn-primary" [routerLink]="['/nuevasesion']">
+                <i class="feather icon-users"></i>
+                Nueva Sesion
+              </button>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-hover mb-0">
+            <thead>
+                <tr>
+                    <td>
+                        Entrenador
+                    </td>
+                    <td>
+                        Especialidad
+                    </td>
+                    <td>
+                        miembro_id
+                    </td>
+                    <td>
+                        Fecha
+                    </td>
+                    <td>
+                        Hora Inicio
+                    </td>
+                    <td>
+                        Hora Fin
+                    </td>
+                    <td>
+                        Acciones
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                @for (sesiones of sesiones; track sesiones) {
+                <tr class="unread">
+                    <td>
+                        <h6 class="mb-1">{{ sesiones.entrenador }}</h6>
+                    </td>
+                    <td>
+                        <h6 class="mb-1">{{ sesiones.especialidad }}</h6>
+                    </td>
+                    <td>
+                        <h6 class="mb-1">{{ sesiones.miembro }}</h6>
+                    </td>
+                    <td>
+                        <h6 class="mb-1">{{ sesiones.fecha }}</h6>
+                    </td>
+                    <td>
+                        <h6 class="mb-1">{{ sesiones.hora_inicio }}</h6>
+                    </td>
+                    <td>
+                        <h6 class="mb-1">{{ sesiones.hora_fin }}</h6>
+                    </td>
+                    <td>
+                        <button ngbTooltip="Editar" [routerLink]="['/editarsesion/', sesiones.sesion_id]" type="button"
+                            class="btn btn-icon btn-outline-success">
+                            <i class="feather icon-check-circle"></i>
+                        </button>
+                        <button ngbTooltip="Eliminar" (click)="eliminar(sesiones.sesion_id)" type="button"
+                            class="btn btn-icon btn-outline-danger">
+                            <i class="feather icon-slash"></i>
+                        </button>
+                        <button ngbTooltip="Generar Pdf" (click)="generarPdf(sesiones)" type="button"
+                            class="btn btn-icon btn-outline-primary">
+                            <i class="feather icon-download"></i>
+                        </button>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,66 @@
+<div class="row">
+  <div class="col-sm-12">
+    <app-card cardTitle={{title}} [options]="false">
+      <h5 class="mt-3">Datos del Entrenador</h5>
+      <hr />
+      <form [formGroup]="frm_Entrenador" (ngSubmit)="grabar()">
+
+        <div class="row">
+          <div class="form-group col-md-6">
+            <label for="inputNombre">Nombre</label>
+            <input formControlName="Nombre" type="text" class="form-control" id="inputNombre" />
+            @if (frm_Entrenador.get('Nombre').invalid && frm_Entrenador.get('Nombre').touched) {
+                @if (frm_Entrenador.get('Nombre').hasError('required')) {
+                    <div >
+                        <small  style="color: red">El nombre es requerido</small>
+                    </div>
+                }
+            }
+          </div>
+          <div class="form-group col-md-6">
+            <label for="inputEspecialidad">Especialidad</label>  
+            <select id="inputEspecialidad" class="form-control" formControlName="Especialidad">
+                @for (especialidad of especialidades; track $index) {
+                    <option [value]="especialidad">{{ especialidad }}</option>
+
+                }
+              </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group col-md-6">
+            <label for="inputTelefono">Teléfono</label>
+            <input formControlName="Telefono" type="text" class="form-control" id="inputTelefono" />            
+            @if (frm_Entrenador.get('Telefono').invalid && frm_Entrenador.get('Telefono').touched) {
+                @if (frm_Entrenador.get('Telefono').hasError('required')) {
+                    <div >
+                        <small  style="color: red">El teléfono es requerido</small>
+                    </div>
+                }
+            }
+          </div>
+          <div class="form-group col-md-6">
+            <label for="inputEmail">Email</label>
+            <input formControlName="Email" type="text" class="form-control" id="inputEmail" />
+                      
+            @if (frm_Entrenador.get('Email').invalid && frm_Entrenador.get('Email').touched) {
+                @if (frm_Entrenador.get('Email').hasError('required')) {
+                    <div >
+                        <small  style="color: red">El email es requerido</small>
+                    </div>
+                }
+                @if (frm_Entrenador.get('Email').hasError('email')) {
+                    <div >
+                        <small  style="color: red">Debe ingresar un correo valido</small>
+                    </div>
+                }
+            }
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="frm_Entrenador.invalid">Guardar</button>
+        <button [routerLink]="['/entrenadores']"  class="btn btn-danger">Cancelar</button>
+      </form>
+    </app-card>
+  </div>
+</div>

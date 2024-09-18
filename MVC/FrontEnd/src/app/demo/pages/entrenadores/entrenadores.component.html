@@ -1,0 +1,73 @@
+<div class="row">
+    <div class="d-flex justify-content-end"> 
+
+        <div class="col-3 py-1">
+            <button type="button" class="btn btn-primary" [routerLink]="['/nuevoentrenador']">
+                <i class="feather icon-users"></i>
+                Nuevo Entrenador
+              </button>
+        </div>
+    </div>
+
+
+    <div class="table-responsive">
+        <table class="table table-hover mb-0">
+
+            <thead>
+                <tr>
+                    <td>
+                        Foto
+                    </td>
+                    <td>
+                        Nombre
+                    </td>
+                    <td>
+                        Especialidad
+                    </td>
+                    <td>
+                        Teléfono
+                    </td>
+                    <td>
+                        Email
+                    </td>
+                    <td>
+                        Acciones
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                @for (entrenador of entrenadores; track entrenador) {
+                <tr class="unread">
+                    <td>
+                        <img class="rounded-circle" style="width: 40px" src="assets/images/user/avatar-2.jpg"
+                            alt="activity-user" />
+                    </td>
+                    <td>
+                        <h6 class="mb-1">{{ entrenador.nombre }}</h6>
+                    </td>
+                    <td>
+                        <h6 class="mb-1">{{ entrenador.especialidad }}</h6>
+                    </td>
+                    <td>
+                        <h6 class="mb-1">{{ entrenador.telefono }}</h6>
+                    </td>
+                    <td>
+                        <h6 class="mb-1">{{ entrenador.email }}</h6>
+                    </td>
+                    <td>
+                        <button ngbTooltip="Editar" [routerLink]="['/editarentrenador/', entrenador.entrenador_id]" type="button"
+                            class="btn btn-icon btn-outline-success">
+                            <i class="feather icon-check-circle"></i>
+                        </button>
+                        <button ngbTooltip="Eliminar" (click)="eliminar(entrenador.entrenador_id)" type="button"
+                            class="btn btn-icon btn-outline-danger">
+                            <i class="feather icon-slash"></i>
+                        </button>
+
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

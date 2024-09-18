@@ -1,0 +1,72 @@
+<div class="row">
+    <div class="d-flex justify-content-end"> 
+
+        <div class="col-3 py-1">
+            <button type="button" class="btn btn-primary" [routerLink]="['/nuevomiembro']">
+                <i class="feather icon-users"></i>
+                Nuevo Miembro
+              </button>
+        </div>
+    </div>
+
+
+    <div class="table-responsive">
+        <table class="table table-hover mb-0">
+            <thead>
+                <tr>
+                    <td>
+                        Foto
+                    </td>
+                    <td>
+                        Nombre
+                    </td>
+                    <td>
+                        Apellido
+                    </td>
+                    <td>
+                        Fecha de Nacimiento
+                    </td>
+                    <td>
+                        Tipo Membresia
+                    </td>
+                    <td>
+                        Acciones
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                @for (miembro of miembros; track miembro) {
+                <tr class="unread">
+                    <td>
+                        <img class="rounded-circle" style="width: 40px" src="assets/images/user/avatar-2.jpg"
+                            alt="activity-user" />
+                    </td>
+                    <td>
+                        <h6 class="mb-1">{{ miembro.nombre }}</h6>
+                    </td>
+                    <td>
+                        <h6 class="mb-1">{{ miembro.apellido }}</h6>
+                    </td>
+                    <td>
+                        <h6 class="mb-1">{{ miembro.fecha_nacimiento }}</h6>
+                    </td>
+                    <td>
+                        <h6 class="mb-1">{{ miembro.tipo_membresia }}</h6>
+                    </td>
+                    <td>
+                        <button ngbTooltip="Editar" [routerLink]="['/editarmiembro/', miembro.miembro_id]" type="button"
+                            class="btn btn-icon btn-outline-success">
+                            <i class="feather icon-check-circle"></i>
+                        </button>
+                        <button ngbTooltip="Eliminar" (click)="eliminar(miembro.miembro_id)" type="button"
+                            class="btn btn-icon btn-outline-danger">
+                            <i class="feather icon-slash"></i>
+                        </button>
+
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

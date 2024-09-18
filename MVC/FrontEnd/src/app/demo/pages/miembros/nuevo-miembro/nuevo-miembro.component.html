@@ -1,0 +1,62 @@
+<div class="row">
+    <div class="col-sm-12">
+      <app-card cardTitle={{title}} [options]="false">
+        <h5 class="mt-3">Datos del Entrenador</h5>
+        <hr />
+        <form [formGroup]="frm_Miembro" (ngSubmit)="grabar()">
+  
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label for="inputNombre">Nombre</label>
+              <input formControlName="Nombre" type="text" class="form-control" id="inputNombre" />
+              @if (frm_Miembro.get('Nombre').invalid && frm_Miembro.get('Nombre').touched) {
+                  @if (frm_Miembro.get('Nombre').hasError('required')) {
+                      <div >
+                          <small  style="color: red">El nombre es requerido</small>
+                      </div>
+                  }
+              }
+            </div>
+            <div class="form-group col-md-6">
+              <label for="inputTipoMembresia">Tipo Membresia</label>  
+              <select id="inputTipoMembresia" class="form-control" formControlName="TipoMembresia">
+                  @for (tipoMembresia of tipoMembresias; track $index) {
+                      <option [value]="tipoMembresia">{{ tipoMembresia }}</option>
+  
+                  }
+                </select>
+            </div>
+          </div>
+  
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label for="inputApellido">Apellido</label>
+              <input formControlName="Apellido" type="text" class="form-control" id="inputApellido" />            
+              @if (frm_Miembro.get('Apellido').invalid && frm_Miembro.get('Apellido').touched) {
+                  @if (frm_Miembro.get('Apellido').hasError('required')) {
+                      <div >
+                          <small  style="color: red">El apellido es requerido</small>
+                      </div>
+                  }
+              }
+            </div>
+            <div class="form-group col-md-6">
+              <label for="inputFechaNacimiento">Fecha de Nacimiento</label>
+              <input formControlName="FechaNacimiento" type="date" class="form-control" id="inputFechaNacimiento" />
+                        
+              @if (frm_Miembro.get('FechaNacimiento').invalid && frm_Miembro.get('FechaNacimiento').touched) {
+                  @if (frm_Miembro.get('FechaNacimiento').hasError('required')) {
+                      <div >
+                          <small  style="color: red">La fecha de nacimiento es requerida</small>
+                      </div>
+                  }
+              }
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary" [disabled]="frm_Miembro.invalid">Guardar</button>
+          <button [routerLink]="['/miembros']"  class="btn btn-danger">Cancelar</button>
+        </form>
+      </app-card>
+    </div>
+  </div>
+  

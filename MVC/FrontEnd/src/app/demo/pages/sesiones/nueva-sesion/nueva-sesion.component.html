@@ -1,0 +1,78 @@
+<div class="row">
+  <div class="col-sm-12">
+    <app-card cardTitle="{{ title }}" [options]="false">
+      <h5 class="mt-3">Datos de la Sesion de entrenamiento</h5>
+      <hr />
+      <form [formGroup]="frm_Sesion" (ngSubmit)="grabar()">
+        <div class="row">
+          <div class="form-group col-md-6">
+            <label for="inputMiembroId">Miembro</label>
+            <select id="inputMiembroId" class="form-control" formControlName="MiembroId">
+              @for (miembro of miembros; track $index) {
+              <option [value]="miembro.miembro_id">
+                {{ miembro.nombre }} {{ miembro.apellido }}
+              </option>
+              }
+            </select>
+          </div>
+          @if (entrenadores.length > 0) {
+          <div class="form-group col-md-6">
+            <label for="inputEntrenadorId">Entrenador</label>
+            <select id="inputEntrenadorId" class="form-control" formControlName="EntrenadorId">
+              @for (entrenador of entrenadores; track $index) {
+              <option [value]="entrenador.entrenador_id">
+                {{ entrenador.nombre }} ({{ entrenador.especialidad }})
+              </option>
+              }
+            </select>
+          </div>
+          }
+        </div>
+
+        <div class="row">
+
+          <div class="form-group col-md-6">
+            <label for="inputFecha">Fecha</label>
+            <input formControlName="Fecha" type="date" class="form-control" id="inputFecha" />
+                      
+            @if (frm_Sesion.get('Fecha').invalid && frm_Sesion.get('Fecha').touched) {
+                @if (frm_Sesion.get('Fecha').hasError('required')) {
+                    <div >
+                        <small  style="color: red">La fecha es requerida</small>
+                    </div>
+                }
+            }
+          </div>
+
+          <div class="form-group col-md-3">
+            <label for="inputHoraInicio">Hora Inicio</label>
+            <select id="inputHoraInicio" class="form-control" formControlName="HoraInicio">
+              @for (horaInicio of horasInicio; track $index) {
+              <option [value]="horaInicio">
+                {{ horaInicio }}
+              </option>
+              }
+            </select>
+          </div>
+
+          <div class="form-group col-md-3">
+            <label for="inputHoraInicio">Hora Fin</label>
+            <select id="inputHoraInicio" class="form-control" formControlName="HoraFin">
+              @for (horaFinal of horasFinal; track $index) {
+              <option [value]="horaFinal">
+                {{ horaFinal }}
+              </option>
+              }
+            </select>
+          </div>
+
+        </div>
+
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <button [routerLink]="['/sesiones']" class="btn btn-danger">
+          Cancelar
+        </button>
+      </form>
+    </app-card>
+  </div>
+</div>
