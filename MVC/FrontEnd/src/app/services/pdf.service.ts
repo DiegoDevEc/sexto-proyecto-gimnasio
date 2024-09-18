@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { jsPDF } from 'jspdf';
 import { ISesion } from '../interfaces/ISesion';
 
+import 'jspdf-autotable';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -42,6 +44,45 @@ export class PdfService {
   
 
     doc.save(`Reserva-${sesion.sesion_id}.pdf`);
+  }
+
+
+  generatePdfSesiones(sesiones: ISesion[]) {
+    const doc = new jsPDF();
+
+    // Define the table columns and rows
+    const columns = [
+      { header: 'Fecha', dataKey: 'fecha' },
+      { header: 'Hora Inicio', dataKey: 'horaInicio' },
+      { header: 'Hora Fin', dataKey: 'horaFin' },
+      { header: 'Miembro', dataKey: 'miembro' },
+      { header: 'Entrenador', dataKey: 'entrenador' },
+      { header: 'Especialidad', dataKey: 'especialidad' }
+    ];
+
+    const rows = sesiones.map(session => ({
+      fecha: session.fecha,
+      horaInicio: session.hora_inicio,
+      horaFin: session.hora_fin,
+      miembro: session.miembro,
+      entrenador: session.entrenador,
+      especialidad: session.especialidad
+    }));
+
+    // Add title
+    doc.setFontSize(22);
+    doc.text('Listado de Sesiones de Entrenamiento', 10, 10);
+
+    // Add table
+    (doc as any).autoTable({
+      columns: columns,
+      body: rows,
+      startY: 20,
+      margin: { top: 30 },
+    });
+
+    // Save the PDF
+    doc.save('sesiones.pdf');
   }
   
 }

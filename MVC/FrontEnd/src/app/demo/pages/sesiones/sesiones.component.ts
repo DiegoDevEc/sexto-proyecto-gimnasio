@@ -14,7 +14,7 @@ import Swal from "sweetalert2";
   styleUrl: './sesiones.component.scss'
 })
 export class SesionesComponent {
-  sesiones = [];
+  sesiones: ISesion[] = [];
 
   constructor(private sesionesService: SesionesService, private pdfServide: PdfService) {}
 
@@ -50,6 +50,9 @@ export class SesionesComponent {
 
   generarPdf(sesion: ISesion){
     this.pdfServide.generatePdf(sesion);
+  }
+  generarPdfSesiones(){
+    this.pdfServide.generatePdfSesiones(this.sesiones);
   }
 
 }
